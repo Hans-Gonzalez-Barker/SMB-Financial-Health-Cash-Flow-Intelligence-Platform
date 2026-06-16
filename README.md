@@ -8,11 +8,14 @@ An end-to-end data pipeline and predictive analytics platform that ingests SMB f
 smb-financial-intelligence/
 ├── .github/workflows/    # GitHub Actions automation
 ├── api/                  # FastAPI codebase
+├── database/             # Displays important SQL querying and testing
 ├── dbt_project/          # dbt-core transformation models
 ├── frontend/             # Streamlit user interface
 ├── ingestion/            # Python scripts for Plaid/QuickBooks APIs
 ├── ml_models/            # Machine learning training & serialization
 ├── .gitignore            # Excludes credentials and virtual environments
+├── .venv.example/        # Example of all necessary tokens and keys
+├── requirements.txt      # Necessary dependencies
 └── README.md             # Project documentation
 ```
 
