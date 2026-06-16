@@ -1,12 +1,13 @@
+import os
 import requests
 from dotenv import load_dotenv
 
-# Load variables from .env file
+# Load variables from the local .env file
 load_dotenv()
 
 # Put your Plaid credentials here
-CLIENT_ID = "PLAID_CLIENT_ID"
-SECRET = "PLAID_SECRET"
+CLIENT_ID = os.getenv("PLAID_CLIENT_ID")
+SECRET = os.getenv("PLAID_SECRET")
 PLAID_ENV_URL = "https://sandbox.plaid.com"
 
 def generate_sandbox_token():
