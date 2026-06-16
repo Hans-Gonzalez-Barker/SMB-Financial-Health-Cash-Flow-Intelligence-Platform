@@ -1,31 +1,42 @@
-# Python virtual environments
-.venv/
-venv/
-ENV/
-env/
+Virtual Environment
 
-# IDE files
+venv/
+.venv/
+env/
+ENV/
+
+Python caching & compiled bytecode
+
+/pycache/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+Environment & Secret files (Never commit these!)
+
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+Databases & local SQL files (if any are saved locally)
+
+*.db
+*.sqlite
+
+IDEs and Editors
+
 .vscode/
 .idea/
+*.suo
+.ntvs
+*.njsproj
+*.sln
+*.swp
 
-# OS files
+OS-specific files
+
 .DS_Store
 Thumbs.db
-
-# Database & Environment Files
-.env
-*.env
-.env.*
-secrets.json
-profiles.yml
-
-# dbt generated folders
-target/
-dbt_packages/
-logs/
-
-# Machine Learning & Local Data
-*.pkl
-*.csv
-*.xlsx
-.ipynb_checkpoints/
