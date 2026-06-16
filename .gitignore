@@ -1,0 +1,31 @@
+# Python virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# IDE files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Database & Environment Files
+.env
+*.env
+.env.*
+secrets.json
+profiles.yml
+
+# dbt generated folders
+target/
+dbt_packages/
+logs/
+
+# Machine Learning & Local Data
+*.pkl
+*.csv
+*.xlsx
+.ipynb_checkpoints/
