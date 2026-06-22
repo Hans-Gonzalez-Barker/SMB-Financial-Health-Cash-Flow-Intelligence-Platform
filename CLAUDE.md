@@ -1,31 +1,33 @@
-SMB Financial Health & Cash Flow Intelligence Platform
+# SMB Financial Health & Cash Flow Intelligence Platform - Project Context Document for Claude Sessions
 
-Project Context Document for Claude Sessions
+## Project Overview
 
-1. Project Overview
-
+```text
 This project is an end-to-end data engineering and predictive analytics platform. It ingests raw financial data from small businesses via the Plaid and QuickBooks APIs, transforms that unstructured JSON data into clean analytical tables, runs machine learning models to predict cash flow and detect anomalies, and serves these insights to a frontend dashboard.
 
 The Business Value: 82% of small businesses fail due to cash flow issues. This tool moves beyond standard accounting by using ML to provide forward-looking risk signals, anomaly alerts, and receivables aging predictions based on existing transactional data.
+```
 
-2. Technical Architecture 
+## Technical Architecture 
 
-We are employing a modern ELT (Extract-Load-Transform) architecture using open-source and free-tier cloud solutions.
+* We are employing a modern ELT (Extract-Load-Transform) architecture using open-source and free-tier cloud solutions.
 
-Ingestion: Python requests, GitHub Actions (for scheduling), Plaid API (Sandbox), QuickBooks API (OAuth Sandbox).
+* Ingestion: Python requests, GitHub Actions (for scheduling), Plaid API (Sandbox), QuickBooks API (OAuth Sandbox).
 
-Storage (Operational & Analytical): PostgreSQL (Local for Phase 1, migrating to Neon/Supabase).
+* Storage (Operational & Analytical): PostgreSQL (Local for Phase 1, migrating to Neon/Supabase).
 
-Transformation: dbt-core (Local/CLI).
+* Transformation: dbt-core (Local/CLI).
 
-Machine Learning: Local Python (scikit-learn, prophet), models exported as .pkl.
+* Machine Learning: Local Python (scikit-learn, prophet), models exported as .pkl.
 
-Serving API: FastAPI hosted on Render or Koyeb.
+* Serving API: FastAPI hosted on Render or Koyeb.
 
-Frontend: Streamlit Community Cloud.
+* Frontend: Streamlit Community Cloud.
 
-3. Data Strategy & Schema Design
 
+## Data Strategy & Schema Design
+
+```text
 We are strictly following the ELT pattern.
 
 The raw_stage schema: Data is ingested exactly as it arrives from the APIs and dumped into PostgreSQL JSONB columns.
@@ -35,9 +37,11 @@ plaid_transactions: Uses the "Envelope Pattern." Contains 1 row with a massive J
 quickbooks_invoices & quickbooks_payments: Uses the "Resource Stream Pattern." Contains 1 row per entity.
 
 The analytics schema: This is where dbt will take the raw JSONB data, parse it, clean it, and build structured, relational tables (e.g., monthly_burn_rate, cash_flow_forecast).
+```
 
-4. Repository Structure
+## Repository Structure
 
+```text
 The project operates as a monorepo:
 
 /SMB-Financial-Health-Platform
@@ -51,11 +55,12 @@ The project operates as a monorepo:
 ├── .env                  # Secret keys (Git-ignored)
 ├── .gitignore            # Hides venv/, .env, __pycache__, etc.
 └── requirements.txt      # Python dependencies
+```
 
 
-5. Current Progress & Roadmap
+## Current Progress & Roadmap
 
-[x] Phase 1: Local Environment & Data Ingestion (COMPLETE)
+* [x] Phase 1: Local Environment & Data Ingestion (COMPLETE)
 
 PostgreSQL installed and smb_finance database created.
 
@@ -69,7 +74,7 @@ Initial queries verified (Data successfully unpacked using ->> and jsonb_array_e
 
 Project committed to GitHub with a secure .gitignore.
 
-[ ] Phase 2: Cloud Storage Migration (UP NEXT)
+* [ ] Phase 2: Cloud Storage Migration (UP NEXT)
 
 Provision a free Neon or Supabase PostgreSQL database.
 
@@ -77,7 +82,7 @@ Replicate local schemas in the cloud.
 
 Update ingest.py to point to the cloud DB URL.
 
-[ ] Phase 3: Data Transformation (dbt)
+* [ ] Phase 3: Data Transformation (dbt)
 
 Initialize dbt-core and configure profiles.yml.
 
@@ -85,34 +90,37 @@ Build staging models to unpack JSONB arrays.
 
 Build business logic models (burn rate, top vendors).
 
-[ ] Phase 4: Automation (GitHub Actions)
+* [ ] Phase 4: Automation (GitHub Actions)
 
 Automate ingest.py and dbt run using a cron schedule.
 
-[ ] Phase 5: Machine Learning (Local Training)
+* [ ] Phase 5: Machine Learning (Local Training)
 
 Query clean dbt tables to train Prophet (cash flow) and Isolation Forest (anomalies).
 
 Serialize models to .pkl.
 
-[ ] Phase 6: The Serving Layer (FastAPI)
+* [ ] Phase 6: The Serving Layer (FastAPI)
 
 Build endpoints to serve predictions and database metrics.
 
-[ ] Phase 7: The Frontend Dashboard (Streamlit)
+* [ ] Phase 7: The Frontend Dashboard (Streamlit)
 
 Connect Streamlit to FastAPI and deploy via Community Cloud.
 
-6. Environment & Dependencies
+## Environment & Dependencies
 
+```text
 Core Requirements (requirements.txt):
 
 psycopg2-binary>=2.9.0
 requests>=2.31.0
 python-dotenv>=1.0.0
-# Future additions: dbt-core, dbt-postgres, fastapi, uvicorn, streamlit, prophet, scikit-learn
+```
 
+## Future additions: dbt-core, dbt-postgres, fastapi, uvicorn, streamlit, prophet, scikit-learn
 
+```text
 Environment Variables Template (.env):
 
 DB_HOST=
@@ -130,3 +138,4 @@ QB_CLIENT_ID=
 QB_CLIENT_SECRET=
 QB_REALM_ID=
 QB_REFRESH_TOKEN=
+```

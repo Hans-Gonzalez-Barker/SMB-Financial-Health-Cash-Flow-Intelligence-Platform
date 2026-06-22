@@ -5,18 +5,17 @@ An end-to-end data pipeline and predictive analytics platform that ingests SMB f
 ## Architecture & Folder Structure
 
 ```text
-smb-financial-intelligence/
-├── .github/workflows/    # GitHub Actions automation
-├── api/                  # FastAPI codebase
-├── database/             # Displays important SQL querying and testing
-├── dbt_project/          # dbt-core transformation models
-├── frontend/             # Streamlit user interface
-├── ingestion/            # Python scripts for Plaid/QuickBooks APIs
-├── ml_models/            # Machine learning training & serialization
-├── .gitignore            # Excludes credentials and virtual environments
-├── .venv.example/        # Example of all necessary tokens and keys
-├── requirements.txt      # Necessary dependencies
-└── README.md             # Project documentation
+/SMB-Financial-Health-Platform
+├── .github/workflows/    # CI/CD and automated ingestion schedules
+├── api/                  # FastAPI application
+├── database/             # schema.sql and verification_queries.sql
+├── dbt_project/          # dbt models, schemas, and tests
+├── frontend/             # Streamlit application
+├── ingestion/            # ingest.py and token helper scripts
+├── ml_models/            # Jupyter notebooks and .pkl model files
+├── .env                  # Secret keys (Git-ignored)
+├── .gitignore            # Hides venv/, .env, __pycache__, etc.
+└── requirements.txt      # Python dependencies
 ```
 
 ## Tech Stack
@@ -35,4 +34,11 @@ smb-financial-intelligence/
 
 - CI/CD: GitHub Actions
 ```
+
+## More info
+```text
+read CLAUDE.md file for more context on the project + progress
+```
+
+
 
