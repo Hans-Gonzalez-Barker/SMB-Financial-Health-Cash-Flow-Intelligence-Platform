@@ -12,7 +12,7 @@ The Business Value: 82% of small businesses fail due to cash flow issues. This t
 
 * Ingestion: Python requests, GitHub Actions (for scheduling), Plaid API (Sandbox), QuickBooks API (OAuth Sandbox).
 
-* Storage (Operational & Analytical): PostgreSQL (Local for Phase 1, migrating to Neon/Supabase).
+* Storage (Operational & Analytical): PostgreSQL (Neon cloud — free tier, serverless Postgres).
 
 * Transformation: dbt-core (Local/CLI).
 
@@ -72,15 +72,17 @@ The project operates as a monorepo:
 
 - Project committed to GitHub with a secure .gitignore.
 
-* [ ] Phase 2: Cloud Storage Migration (UP NEXT)
+* [x] Phase 2: Cloud Storage Migration (COMPLETE)
 
-- Provision a free Neon or Supabase PostgreSQL database.
+- Provisioned a free Neon PostgreSQL database (serverless, AWS us-east-1).
 
-- Replicate local schemas in the cloud.
+- Replicated raw_stage schema (plaid_transactions, quickbooks_invoices, quickbooks_payments) in the cloud via Neon SQL editor.
 
-- Update ingest.py to point to the cloud DB URL.
+- Updated get_db_connection() in ingest.py to check for DATABASE_URL first (cloud path with sslmode=require), falling back to individual DB_* vars for local development.
 
-* [ ] Phase 3: Data Transformation (dbt)
+- DATABASE_URL added to .env. Pipeline verified end-to-end against Neon.
+
+* [ ] Phase 3: Data Transformation (dbt) (UP NEXT)
 
 - Initialize dbt-core and configure profiles.yml.
 
@@ -121,7 +123,9 @@ python-dotenv>=1.0.0
 ```text
 Environment Variables Template (.env):
 
-DB_HOST=
+DATABASE_URL=                  # Neon connection string (cloud — takes priority)
+
+DB_HOST=                       # Local fallback
 DB_PORT=
 DB_NAME=
 DB_USER=

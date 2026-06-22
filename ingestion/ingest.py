@@ -34,13 +34,20 @@ QB_URL = "https://sandbox-quickbooks.api.intuit.com"
 
 def get_db_connection():
     """Establishes and returns a connection to PostgreSQL."""
-    return psycopg2.connect(
-        host=DB_HOST,
-        port=DB_PORT,
-        database=DB_NAME,
-        user=DB_USER,
-        password=DB_PASSWORD
-    )
+    database_url = os.getenv("DATABASE_URL")
+
+    if database_url:
+        # Cloud path: Neon / Supabase provide a single DATABASE_URL
+        return psycopg2.connect(database_url, sslmode="require")
+    else:
+        # Local path: fall back to individual env vars
+        return psycopg2.connect(
+            host=DB_HOST,
+            port=DB_PORT,
+            database=DB_NAME,
+            user=DB_USER,
+            password=DB_PASSWORD
+        )
 
 
 # ==========================================
