@@ -2,11 +2,9 @@
 
 ## Project Overview
 
-```text
 This project is an end-to-end data engineering and predictive analytics platform. It ingests raw financial data from small businesses via the Plaid and QuickBooks APIs, transforms that unstructured JSON data into clean analytical tables, runs machine learning models to predict cash flow and detect anomalies, and serves these insights to a frontend dashboard.
 
 The Business Value: 82% of small businesses fail due to cash flow issues. This tool moves beyond standard accounting by using ML to provide forward-looking risk signals, anomaly alerts, and receivables aging predictions based on existing transactional data.
-```
 
 ## Technical Architecture 
 
@@ -62,51 +60,51 @@ The project operates as a monorepo:
 
 * [x] Phase 1: Local Environment & Data Ingestion (COMPLETE)
 
-PostgreSQL installed and smb_finance database created.
+- PostgreSQL installed and smb_finance database created.
 
-/database/schema.sql executed to create the raw_stage tables with JSONB columns.
+- /database/schema.sql executed to create the raw_stage tables with JSONB columns.
 
-Plaid and QuickBooks API keys acquired and stored in local .env.
+- Plaid and QuickBooks API keys acquired and stored in local .env.
 
-/ingestion/ingest.py script written to successfully extract Sandbox data and load it into local Postgres.
+- /ingestion/ingest.py script written to successfully extract Sandbox data and load it into local Postgres.
 
-Initial queries verified (Data successfully unpacked using ->> and jsonb_array_elements).
+- Initial queries verified (Data successfully unpacked using ->> and jsonb_array_elements).
 
-Project committed to GitHub with a secure .gitignore.
+- Project committed to GitHub with a secure .gitignore.
 
 * [ ] Phase 2: Cloud Storage Migration (UP NEXT)
 
-Provision a free Neon or Supabase PostgreSQL database.
+- Provision a free Neon or Supabase PostgreSQL database.
 
-Replicate local schemas in the cloud.
+- Replicate local schemas in the cloud.
 
-Update ingest.py to point to the cloud DB URL.
+- Update ingest.py to point to the cloud DB URL.
 
 * [ ] Phase 3: Data Transformation (dbt)
 
-Initialize dbt-core and configure profiles.yml.
+- Initialize dbt-core and configure profiles.yml.
 
-Build staging models to unpack JSONB arrays.
+- Build staging models to unpack JSONB arrays.
 
-Build business logic models (burn rate, top vendors).
+- Build business logic models (burn rate, top vendors).
 
 * [ ] Phase 4: Automation (GitHub Actions)
 
-Automate ingest.py and dbt run using a cron schedule.
+- Automate ingest.py and dbt run using a cron schedule.
 
 * [ ] Phase 5: Machine Learning (Local Training)
 
-Query clean dbt tables to train Prophet (cash flow) and Isolation Forest (anomalies).
+- Query clean dbt tables to train Prophet (cash flow) and Isolation Forest (anomalies).
 
-Serialize models to .pkl.
+- Serialize models to .pkl.
 
 * [ ] Phase 6: The Serving Layer (FastAPI)
 
-Build endpoints to serve predictions and database metrics.
+- Build endpoints to serve predictions and database metrics.
 
 * [ ] Phase 7: The Frontend Dashboard (Streamlit)
 
-Connect Streamlit to FastAPI and deploy via Community Cloud.
+- Connect Streamlit to FastAPI and deploy via Community Cloud.
 
 ## Environment & Dependencies
 
