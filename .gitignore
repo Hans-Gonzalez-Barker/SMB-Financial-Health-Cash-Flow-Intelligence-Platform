@@ -40,3 +40,9 @@ OS-specific files
 
 .DS_Store
 Thumbs.db
+
+dbt build artifacts (generated, not source)
+
+logs/
+dbt_project/target/
+dbt_project/dbt_packages/

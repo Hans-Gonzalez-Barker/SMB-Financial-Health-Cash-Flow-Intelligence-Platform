@@ -1,0 +1,31 @@
+version: 2
+
+sources:
+  - name: raw_stage
+    schema: raw_stage
+    description: "Raw JSONB payloads ingested by ingest.py"
+    tables:
+      - name: plaid_transactions
+        description: "Envelope-pattern payload from Plaid /transactions/sync"
+      - name: quickbooks_invoices
+        description: "One row per invoice from QuickBooks API"
+      - name: quickbooks_payments
+        description: "One row per payment from QuickBooks API"
+
+models:
+  - name: stg_plaid_transactions
+    columns:
+      - name: transaction_id
+        tests:
+          - unique
+          - not_null
+      - name: amount
+        tests:
+          - not_null
+
+  - name: stg_quickbooks_invoices
+    columns:
+      - name: invoice_id
+        tests:
+          - unique
+          - not_null

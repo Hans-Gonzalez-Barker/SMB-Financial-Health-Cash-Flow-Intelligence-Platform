@@ -14,7 +14,7 @@ The Business Value: 82% of small businesses fail due to cash flow issues. This t
 
 * Storage (Operational & Analytical): PostgreSQL (Neon cloud — free tier, serverless Postgres).
 
-* Transformation: dbt-core (Local/CLI).
+* Transformation: dbt-core 1.11.11 + dbt-postgres 1.10.1 (Local/CLI, Python 3.12).
 
 * Machine Learning: Local Python (scikit-learn, prophet), models exported as .pkl.
 
@@ -82,15 +82,21 @@ The project operates as a monorepo:
 
 - DATABASE_URL added to .env. Pipeline verified end-to-end against Neon.
 
-* [ ] Phase 3: Data Transformation (dbt) (UP NEXT)
+* [x] Phase 3: Data Transformation (dbt) (COMPLETE)
 
-- Initialize dbt-core and configure profiles.yml.
+- Installed dbt-core 1.11.11 and dbt-postgres 1.10.1 into Python 3.12 venv (dbt incompatible with Python 3.14).
 
-- Build staging models to unpack JSONB arrays.
+- Initialized dbt project at /dbt_project/. Configured ~/.dbt/profiles.yml to connect to Neon (analytics schema, sslmode=require).
 
-- Build business logic models (burn rate, top vendors).
+- Declared raw_stage tables as dbt sources in models/staging/sources.yml.
 
-* [ ] Phase 4: Automation (GitHub Actions)
+- Built 3 staging models (views): stg_plaid_transactions (jsonb_array_elements unpack), stg_quickbooks_invoices, stg_quickbooks_payments.
+
+- Built 2 mart models (tables): monthly_burn_rate, receivables_aging with aging bucket logic.
+
+- Added built-in dbt tests: unique + not_null on transaction_id, not_null on amount, unique + not_null on invoice_id.
+
+* [ ] Phase 4: Automation (GitHub Actions) (UP NEXT)
 
 - Automate ingest.py and dbt run using a cron schedule.
 
@@ -118,7 +124,7 @@ requests>=2.31.0
 python-dotenv>=1.0.0
 ```
 
-## Future additions: dbt-core, dbt-postgres, fastapi, uvicorn, streamlit, prophet, scikit-learn
+## Future additions: fastapi, uvicorn, streamlit, prophet, scikit-learn
 
 ```text
 Environment Variables Template (.env):
